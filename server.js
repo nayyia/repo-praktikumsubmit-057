@@ -35,7 +35,30 @@ app.post('/submit-task', upload.single('file_tugas'), async (req, res) => {
     const sql = "INSERT INTO submissions (nim, name, class, course, file_url) VALUES (?, ?, ?, ?, ?)";
     db.query(sql, [nim, name, class_name, course, fileUrl], (err) => {
         if (err) return res.status(500).send(err);
-        res.send('<h2>Tugas Berhasil Dikirim!</h2><a href="/">Kembali</a>');
+        res.send(`<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berhasil</title>
+    <style>
+        :root { --blue: #7ab8f5; --pink: #f48fb1; --soft-blue: #dceefb; --soft-pink: #fde0eb; --dark: #3a6fa8; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, var(--soft-blue), var(--soft-pink)); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        .card { background: #fff; border-radius: 20px; padding: 2.5rem 2rem; text-align: center; max-width: 360px; width: 90%; box-shadow: 0 8px 24px rgba(122,184,245,0.2); }
+        h2 { color: var(--dark); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        p { color: #9ab4cc; font-size: 0.85rem; margin-bottom: 1.5rem; }
+        a { display: inline-block; padding: 10px 28px; background: linear-gradient(135deg, var(--blue), var(--pink)); color: #fff; border-radius: 12px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Tugas Berhasil Dikirim!</h2>
+        <p>File dan metadata telah tersimpan di Azure Cloud.</p>
+        <a href="/">Kembali ke Beranda</a>
+    </div>
+</body>
+</html>`);
     });
 });
 
