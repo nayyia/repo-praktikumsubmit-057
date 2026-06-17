@@ -35,7 +35,7 @@ app.post('/submit-task', upload.single('file_tugas'), async (req, res) => {
     const sql = "INSERT INTO submissions (nim, name, class, course, file_url) VALUES (?, ?, ?, ?, ?)";
     db.query(sql, [nim, name, class_name, course, fileUrl], (err) => {
         if (err) return res.status(500).send(err);
-        res.redirect('/success.html');
+        res.send('<h2>Tugas Berhasil Dikirim!</h2><a href="/">Kembali</a>');
     });
 });
 
